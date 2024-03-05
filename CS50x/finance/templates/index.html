@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Symbol</th>
+        <th scope="col">Shares</th>
+        <th scope="col">Price</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for row in database %}
+      <tr>
+        <td>{{ row["symbol"] }}</td>
+        <td>{{ row["shares"] }}</td>
+        <td>{{ row["price"] | usd }}</td>
+        <td>{{ (row["price"] * row["shares"]) | usd }}</td>
+      </tr>
+        {% endfor %}
+      <tfoot>
+        <tr>
+          <td style="text-align: center" colspan="3" ><b>Cash</b></td>
+          <td style="text-align: center">{{ cash | usd }}</td>
+        </tr>
+        <tr>
+          <td style="text-align: center" colspan="3"><b>Total</b></td>
+          <td style="text-align: center">{{ total | usd }}</td>
+        </tr>
+      </tfoot>
+    </tbody>
+  </table>
+{% endblock %}
